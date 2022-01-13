@@ -7,12 +7,14 @@ import {
     FixedBottomPominentButton,
     TopbarBackButton,
 } from '../LayoutComponents/LayoutComponents';
+import { BASE_URI, ENV_TYPE, PASS_WORD, USER_NAME } from '../paths';
 
 const ExamplePage = () => {
     const topbarLeftButton: TopbarBackButton = {
         type: 'back',
         onClick: () => console.log('Clicked back'),
     };
+    console.log(BASE_URI, USER_NAME, PASS_WORD, ENV_TYPE)
     return (
         <PageContainer>
             <FixedTopBar

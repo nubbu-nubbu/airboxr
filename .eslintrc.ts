@@ -6,7 +6,7 @@ module.exports = {
     ],
     rules: {
       'import/no-namespace': 'error',
-      'import/no-relative-parent-imports': 'error',
+      'import/no-relative-parent-imports': 'off',
       'import/no-anonymous-default-export': [
         'error',
         {
@@ -22,7 +22,6 @@ module.exports = {
       'react/react-in-jsx-scope': 'off',
       'react/require-default-props': 'off',
       'react/jsx-filename-extension': 'off',
-      'import/no-relative-parent-imports': 'off',
     },
     parserOptions: {
       project: './tsconfig.json',
