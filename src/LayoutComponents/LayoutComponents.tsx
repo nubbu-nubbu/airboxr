@@ -5,7 +5,7 @@ import {
     Button,
     CircularProgress,
 } from '@material-ui/core';
-import ArrowBack from '@material-ui/icons/ArrowBack';
+import { ArrowBack, Home, Chat } from '@material-ui/icons';
 import React from 'react';
 
 export interface TopbarBackButton {
@@ -13,8 +13,20 @@ export interface TopbarBackButton {
     onClick: () => void | Promise<void>;
 }
 
+export interface TopbarHomeButton {
+    type: 'home';
+    onClick: () => void | Promise<void>;
+}
+
+export interface TopbarChatButton {
+    type: 'chat';
+    onClick: () => void | Promise<void>;
+}
+
 interface TopBarProps {
     leftButton?: TopbarBackButton;
+    homeButton?: TopbarHomeButton;
+    chatButton?: TopbarChatButton;
     title: string;
 }
 
@@ -22,31 +34,70 @@ export const FixedTopBar: React.FunctionComponent<TopBarProps> = (props) => {
     return (
         <Box
             style={{
-                paddingLeft: 15,
-                paddingRight: 15,
                 top: 0,
                 right: 0,
                 bottom: 'auto',
                 left: 0,
                 position: 'fixed',
-                height: 60,
+                height: 120,
             }}
             pt={1}
             display="flex"
-            flexDirection="row"
+            flexDirection="column"
             alignItems="center"
         >
-            {props.leftButton ? (
-                <IconButton
+            {props.homeButton || props.chatButton ? <Box
+                style={{
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    height: 60,
+                    background: 'whitesmoke',
+                    width: '-webkit-fill-available',
+                }}
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="space-between"
+            >
+                {props.homeButton ? <IconButton
                     edge="start"
                     color="secondary"
-                    aria-label="menu"
-                    onClick={props.leftButton.onClick}
+                    onClick={props.homeButton.onClick}
                 >
-                    <ArrowBack />
-                </IconButton>
-            ) : undefined}
-            <Typography variant="h2">{props.title}</Typography>
+                    <Home />
+                </IconButton> : undefined}
+                {props.chatButton ? <Button
+                    onClick={props.chatButton.onClick}
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<Chat />}
+                >
+                    Chat
+                </Button> : undefined}
+            </Box> : undefined}
+            <Box
+                style={{
+                    height: 60,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    width: '-webkit-fill-available',
+                }}
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+            >
+                {props.leftButton ? (
+                    <IconButton
+                        edge="start"
+                        color="secondary"
+                        aria-label="menu"
+                        onClick={props.leftButton.onClick}
+                    >
+                        <ArrowBack />
+                    </IconButton>
+                ) : undefined}
+                <Typography variant="h2">{props.title}</Typography>
+            </Box>
         </Box>
     );
 };
@@ -99,7 +150,7 @@ export const FixedMiddleBodyWithVerticalScroll: React.FunctionComponent<{}> = (
             style={{
                 paddingLeft: 15,
                 paddingRight: 15,
-                top: 70,
+                top: 130,
                 right: 0,
                 bottom: 65,
                 left: 0,

@@ -1,0 +1,78 @@
+[
+    {
+        "id": 115,
+        "name": "Google Analytics",
+        "spreadsheetId": "1x833iViwNz0iyKqPTfKx3lbbgQz75nYNknU91z1P4nc",
+        "url": "https://docs.google.com/spreadsheets/d/1x833iViwNz0iyKqPTfKx3lbbgQz75nYNknU91z1P4nc/edit?ouid=112523512613252312022&urlBuilderDomain=airboxr.com",
+        "tables": [
+            {
+                "id": 2,
+                "title": "Audience"
+            },
+            {
+                "id": 3,
+                "title": "Acquisition"
+            },
+            {
+                "id": 4,
+                "title": "Goals"
+            }
+        ]
+    },
+    {
+        "id": 116,
+        "name": "Facebook Ads",
+        "spreadsheetId": "1RlxLMHYb_VbFRnC8eJGQecGtpmM7cCgmXggPD0px_qc",
+        "url": "https://docs.google.com/spreadsheets/d/1RlxLMHYb_VbFRnC8eJGQecGtpmM7cCgmXggPD0px_qc/edit?ouid=112523512613252312022&urlBuilderDomain=airboxr.com",
+        "tables": [
+            {
+                "id": 8,
+                "title": "Ad Performance"
+            }
+        ]
+    },
+    {
+        "id": 117,
+        "name": "Google Ads",
+        "spreadsheetId": "1J7cbfPcWjcsztzT3OqJ4LT-1FscGwmW8VL9uRsMxjKE",
+        "url": "https://docs.google.com/spreadsheets/d/1J7cbfPcWjcsztzT3OqJ4LT-1FscGwmW8VL9uRsMxjKE/edit?ouid=112523512613252312022&urlBuilderDomain=airboxr.com",
+        "tables": [
+            {
+                "id": 1,
+                "title": "Ad Performance"
+            }
+        ]
+    },
+    {
+        "id": 114,
+        "name": "Mailchimp",
+        "spreadsheetId": "17X3QD63al2gzCon_vkdyzQp64qISvGO8ItMYbXyCcz8",
+        "url": "https://docs.google.com/spreadsheets/d/17X3QD63al2gzCon_vkdyzQp64qISvGO8ItMYbXyCcz8/edit?ouid=112523512613252312022&urlBuilderDomain=airboxr.com",
+        "tables": [
+            {
+                "id": 2114129332,
+                "title": "Audience"
+            },
+            {
+                "id": 402311786,
+                "title": "Lists||Members #1"
+            },
+            {
+                "id": 1003217118,
+                "title": "Lists||Members #2"
+            },
+            {
+                "id": 2078554215,
+                "title": "Reports||Reports #1"
+            },
+            {
+                "id": 384986954,
+                "title": "Reports||Reports #2"
+            },
+            {
+                "id": 1227324188,
+                "title": "Reports||Reports #3"
+            }
+        ]
+    }
+]

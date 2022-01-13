@@ -1,4 +1,4 @@
-// import { Typography, Button, Box, IconButton } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import React from 'react';
 import {
     PageContainer,
@@ -10,7 +10,7 @@ import {
 import { BASE_URI, ENV_TYPE, PASS_WORD, USER_NAME } from '../paths';
 import { openToast } from '../Toasts';
 
-const ExamplePage = () => {
+const TablePage = () => {
     const topbarLeftButton: TopbarBackButton = {
         type: 'back',
         onClick: () => console.log('Clicked back'),
@@ -23,11 +23,16 @@ const ExamplePage = () => {
     return (
         <PageContainer>
             <FixedTopBar
-                title="Example Page Title"
+                title="What would you like to do today?"
                 leftButton={topbarLeftButton}
             />
             <FixedMiddleBodyWithVerticalScroll>
                 {/* Body goes here */}
+                <Typography variant="subtitle1" component="h6">
+                    TAble
+                </Typography>
+                <Button variant="outlined">Import Data</Button>
+                <Button variant="outlined">Lookup Data</Button>
             </FixedMiddleBodyWithVerticalScroll>
             <FixedBottomPominentButton
                 title="Test / Debug"
@@ -39,4 +44,4 @@ const ExamplePage = () => {
     );
 };
 
-export default ExamplePage;
+export default TablePage;

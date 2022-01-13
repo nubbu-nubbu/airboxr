@@ -1,0 +1,46 @@
+.sources-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px auto;
+}
+
+.source-card > img {
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.source-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 120px;
+    width: 120px;
+    padding: 20px;
+    margin: 5px;
+    border: 1px solid whitesmoke;
+    border-radius: 4px;
+}
+
+.source-card:hover {
+    background-color: whitesmoke;
+}
+
+.source-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 3px;
+}
+
+.favorite-wrap {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
