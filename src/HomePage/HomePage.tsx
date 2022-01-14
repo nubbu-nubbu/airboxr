@@ -2,39 +2,22 @@ import { Typography, Button } from '@material-ui/core';
 import { useNavigate } from "react-router-dom";
 import React from 'react';
 import {
-    PageContainer,
     FixedTopBar,
     FixedMiddleBodyWithVerticalScroll,
-    TopbarHomeButton,
-    TopbarChatButton
 } from '../LayoutComponents/LayoutComponents';
-import { openToast } from '../Toasts';
+import { HOME_TITLE, HOME_WELCOME } from '../constant';
 
 const HomePage = () => {
     const navigate = useNavigate();
-
-    const topbarHomeButton: TopbarHomeButton = {
-        type: 'home',
-        onClick: () => navigate('/airboxr/home'),
-    };
-
-    const topbarChatButton: TopbarChatButton = {
-        type: 'chat',
-        onClick: () => {
-            openToast('info', 'Chat Clicked!')
-        },
-    };
 
     const clickHandler = () => {
         navigate('/airboxr/source');
     }
 
     return (
-        <PageContainer>
+        <>
             <FixedTopBar
-                title="What would you like to do today?"
-                homeButton={topbarHomeButton}
-                chatButton={topbarChatButton}
+                title={HOME_TITLE}
             />
             <FixedMiddleBodyWithVerticalScroll>
                 <Typography 
@@ -45,7 +28,7 @@ const HomePage = () => {
                     variant="subtitle1"
                     component="p"
                 >
-                    Welcome to AirBoxr. Let's start with the task you want to accomplish today.
+                    {HOME_WELCOME}
                 </Typography>
                 <Button
                     variant="outlined"
@@ -63,7 +46,7 @@ const HomePage = () => {
                     Lookup Data
                 </Button>
             </FixedMiddleBodyWithVerticalScroll>
-        </PageContainer>
+        </>
     );
 };
 

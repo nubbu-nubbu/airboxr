@@ -1,18 +1,14 @@
-import { Typography, Button, CircularProgress, FormControl, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
+import { Typography, CircularProgress, FormControl, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { DynamicModuleLoader } from 'redux-dynamic-modules-react';
 import {
-    PageContainer,
     FixedTopBar,
     FixedMiddleBodyWithVerticalScroll,
     FixedBottomPominentButton,
     TopbarBackButton,
-    TopbarChatButton,
-    TopbarHomeButton
 } from '../LayoutComponents/LayoutComponents';
-import { openToast } from '../Toasts';
 import { useSelector } from 'react-redux';
+import { TABLE_TITLE, TABLE_WELCOME } from '../constant';
 
 const tableNameSeparator = '||';
 
@@ -73,8 +69,7 @@ const TablePage = () => {
             }
             if (split.length > history.length && val === split[history.length] && split[history.length + 1]) return true;
             return false;
-        })
-        console.log(arr, value);
+        });
         return !!arr.length;
     }
 
@@ -83,25 +78,11 @@ const TablePage = () => {
         setValue('');
     }
 
-    const topbarHomeButton: TopbarHomeButton = {
-        type: 'home',
-        onClick: () => navigate('/airboxr/home'),
-    };
-
-    const topbarChatButton: TopbarChatButton = {
-        type: 'chat',
-        onClick: () => {
-            openToast('info', 'Chat Clicked!')
-        },
-    };
-
     return (
-        <PageContainer>
+        <>
             <FixedTopBar
-                title="Select table."
+                title={TABLE_TITLE}
                 leftButton={topbarLeftButton}
-                homeButton={topbarHomeButton}
-                chatButton={topbarChatButton}
             />
             <FixedMiddleBodyWithVerticalScroll>
                 <Typography 
@@ -112,7 +93,7 @@ const TablePage = () => {
                     variant="subtitle1"
                     component="p"
                 >
-                {`${getSourceName()} has the following tables ready for import. Please select the table you would like to import.`}
+                {`${getSourceName()} ${TABLE_WELCOME}`}
                 </Typography>
                 {loading ? <CircularProgress /> : (<FormControl component="fieldset">
                     <RadioGroup
@@ -132,7 +113,7 @@ const TablePage = () => {
                 onClick={nextHandler}
                 disabled={!hasChildren(value)}
             />
-        </PageContainer>
+        </>
     );
 };
 

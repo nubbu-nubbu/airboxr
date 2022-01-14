@@ -10,6 +10,7 @@ import LogoFAd from '../images/facebook-ads-logo.png';
 import { CircularProgress, IconButton, Typography } from '@material-ui/core';
 import { markFavourite } from '../store/source/action';
 
+// temp id-logo matching
 const LogoMap:any = {
     114: LogoMCh,
     115: LogoGAn,

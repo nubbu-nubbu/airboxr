@@ -4,15 +4,12 @@ import { DynamicModuleLoader } from 'redux-dynamic-modules-react';
 import Sources from './Sources';
 import React from 'react';
 import {
-    PageContainer,
     FixedTopBar,
     FixedMiddleBodyWithVerticalScroll,
     TopbarBackButton,
-    TopbarChatButton,
-    TopbarHomeButton,
 } from '../LayoutComponents/LayoutComponents';
 import { getSourceModule } from '../store/source/module';
-import { openToast } from '../Toasts';
+import { SOURCE_TITLE, SOURCE_WELCOME } from '../constant';
 
 const SourcePage = () => {
     
@@ -23,25 +20,11 @@ const SourcePage = () => {
         onClick: () => navigate('/airboxr/home'),
     };
 
-    const topbarHomeButton: TopbarHomeButton = {
-        type: 'home',
-        onClick: () => navigate('/airboxr/home'),
-    };
-
-    const topbarChatButton: TopbarChatButton = {
-        type: 'chat',
-        onClick: () => {
-            openToast('info', 'Chat Clicked!')
-        },
-    };
-
     return (
-        <PageContainer>
+        <>
             <FixedTopBar
-                title="Select source."
+                title={SOURCE_TITLE}
                 leftButton={topbarLeftButton}
-                homeButton={topbarHomeButton}
-                chatButton={topbarChatButton}
             />
             <FixedMiddleBodyWithVerticalScroll>
                 <Typography 
@@ -52,13 +35,13 @@ const SourcePage = () => {
                     variant="subtitle1"
                     component="p"
                 >
-                    Below is a list of sources you have connected. Please choose the data source you would like to import data from.
+                    {SOURCE_WELCOME}
                 </Typography>
                 <DynamicModuleLoader modules={[getSourceModule()]}>
                     <Sources />
                 </DynamicModuleLoader>
             </FixedMiddleBodyWithVerticalScroll>
-        </PageContainer>
+        </>
     );
 };
 
