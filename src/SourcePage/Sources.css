@@ -5,6 +5,7 @@
     justify-content: center;
     flex-wrap: wrap;
     margin: 10px auto;
+    min-height: 120px;
 }
 
 .source-card > img {

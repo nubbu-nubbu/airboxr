@@ -12,7 +12,7 @@ import {
     TopbarHomeButton,
 } from '../LayoutComponents/LayoutComponents';
 import { getSourceModule } from '../store/source/module';
-// import { openToast } from '../Toasts';
+import { openToast } from '../Toasts';
 
 const SourcePage = () => {
     
@@ -30,13 +30,15 @@ const SourcePage = () => {
 
     const topbarChatButton: TopbarChatButton = {
         type: 'chat',
-        onClick: () => console.log('chat clicked!'),
+        onClick: () => {
+            openToast('info', 'Chat Clicked!')
+        },
     };
 
     return (
         <PageContainer>
             <FixedTopBar
-                title="Select Source"
+                title="Select source."
                 leftButton={topbarLeftButton}
                 homeButton={topbarHomeButton}
                 chatButton={topbarChatButton}

@@ -104,6 +104,7 @@ export const FixedTopBar: React.FunctionComponent<TopBarProps> = (props) => {
 
 interface BottomButtonProps {
     processing?: boolean;
+    disabled?: boolean;
     onClick: () => void | Promise<void>;
     title: string;
 }
@@ -134,6 +135,7 @@ export const FixedBottomPominentButton: React.FunctionComponent<
                 <Button
                     style={{ height: 50, width: '100%' }}
                     onClick={props.onClick}
+                    disabled={props.disabled}
                 >
                     {props.title}
                 </Button>

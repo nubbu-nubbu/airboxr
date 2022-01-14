@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import './Sources.css';
@@ -19,9 +20,10 @@ const LogoMap:any = {
 export default function Sources() {
     const { sources, loading } = useSelector(({ source }: any) => source);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const clickHandler = () => {
-
+    const clickHandler = (id: string | number) => {
+        navigate(`/airboxr/table/${id}`);
     }
 
     return (
@@ -42,7 +44,7 @@ export default function Sources() {
                     >
                         {name}
                     </Typography>
-                    <img onClick={clickHandler} src={LogoMap[id]} alt={name} />
+                    <img onClick={() => clickHandler(id)} src={LogoMap[id]} alt={name} />
                     <div className='favorite-wrap'>
                         <IconButton
                             onClick={() => dispatch(markFavourite({ id }))}

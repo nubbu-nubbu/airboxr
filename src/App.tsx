@@ -1,13 +1,11 @@
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import { DynamicModuleLoader } from 'redux-dynamic-modules-react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import HomePage from './HomePage/HomePage';
 import SourcePage from './SourcePage/SourcePage';
-import TablePage from './TablePage/TablePage';
+import TablePage from './TablePage/TableWrap';
 
 function App() {
     return (
@@ -18,7 +16,7 @@ function App() {
               <Route path="/airboxr/home" element={<HomePage />} />
               <Route path="/airboxr/source" element={<SourcePage />} />
               <Route path="/airboxr/table/:source" element={<TablePage />} />
-              <Route path="*" element={<div>Invalid Route</div>} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </BrowserRouter>
           <ToastContainer

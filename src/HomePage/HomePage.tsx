@@ -8,6 +8,7 @@ import {
     TopbarHomeButton,
     TopbarChatButton
 } from '../LayoutComponents/LayoutComponents';
+import { openToast } from '../Toasts';
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -19,7 +20,9 @@ const HomePage = () => {
 
     const topbarChatButton: TopbarChatButton = {
         type: 'chat',
-        onClick: () => console.log('chat clicked!'),
+        onClick: () => {
+            openToast('info', 'Chat Clicked!')
+        },
     };
 
     const clickHandler = () => {
