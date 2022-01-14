@@ -2,6 +2,8 @@ export const LS_KEYS = {
     AUTH: 'airboxr_token',
 };
 
+export const TABLE_NAME_SEPARATOR = '||';
+
 // homepage
 export const HOME_TITLE = "What would you like to do today?";
 export const HOME_WELCOME = "Welcome to AirBoxr. Let's start with the task you want to accomplish today.";

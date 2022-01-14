@@ -1,5 +1,5 @@
-import { Typography, CircularProgress, FormControl, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Typography, CircularProgress, FormControl, RadioGroup, Radio, FormControlLabel, TextField } from '@material-ui/core';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
     FixedTopBar,
@@ -8,9 +8,8 @@ import {
     TopbarBackButton,
 } from '../LayoutComponents/LayoutComponents';
 import { useSelector } from 'react-redux';
-import { TABLE_TITLE, TABLE_WELCOME } from '../constant';
-
-const tableNameSeparator = '||';
+import { TABLE_NAME_SEPARATOR, TABLE_TITLE, TABLE_WELCOME } from '../constant';
+import { openToast } from '../Toasts';
 
 const TablePage = () => {
     const { sources, loading } = useSelector(({ source }: any) => source);
@@ -18,37 +17,41 @@ const TablePage = () => {
     const params = useParams();
     const [history, setHistory] = useState<any>([]);
     const [value, setValue] = useState('');
+    const [filter, setFilter] = useState('');
+    const [filteredTables, setFilteredTables] = useState<any>([]);
 
     const getTables = () => {
         const source = sources.find((src: any) => src.id == params.source);
+        if (!source) {
+            openToast('warn', 'Source not found.');
+            return navigate('/airboxr/source');
+        }
         if (history.length) {
-            if (!source) return [];
             return Array.from(new Set(source.tables.filter((table: any) => {
-                const split = table.title.split(tableNameSeparator);
+                const split = table.title.split(TABLE_NAME_SEPARATOR);
                 for (let i = 0; i < history.length; i += 1) {
                     if (history[i] !== split[i]) return false;
                 }
                 return true;
-            }).map((tab: any) => tab.title.split(tableNameSeparator)[history.length])));
+            }).map((tab: any) => tab.title.split(TABLE_NAME_SEPARATOR)[history.length])));
         } else {
-            if (!source) return [];
-            return Array.from(new Set(source.tables.map((table: any) => table.title.split(tableNameSeparator)[0])))
+            return Array.from(new Set(source.tables.map((table: any) => table.title.split(TABLE_NAME_SEPARATOR)[0])))
         }
     }
 
     const getSourceName = () => {
+        const source = sources.find((src: any) => src.id == params.source);
         if (history.length) {
             return history[history.length - 1];
         } else {
-            const source = sources.find((src: any) => src.id == params.source);
-            if (!source) return params.source;
-            return source.name;
+            return source?.name;
         }
     }
 
     const backHandler = () => {
         if (history.length) {
             setHistory(history.filter((_: any, i :number, self: any) => i !== self.length - 1));
+            setFilter('');
         } else {
             navigate('/airboxr/source');
         }
@@ -62,8 +65,9 @@ const TablePage = () => {
     const hasChildren = (val: string) => {
         const source = sources.find((src: any) => src.id == params.source);
         if (!source) return false;
+        // tables having more nested table after value
         const arr = source.tables.filter((table: any) => {
-            const split = table.title.split(tableNameSeparator);
+            const split = table.title.split(TABLE_NAME_SEPARATOR);
             for (let i = 0; i < history.length; i += 1) {
                 if (history[i] !== split[i]) return false;
             }
@@ -76,7 +80,24 @@ const TablePage = () => {
     const nextHandler = () => {
         setHistory(history.concat(value));
         setValue('');
+        setFilter('');
     }
+
+    let filterTimeout:any = useRef();
+    useEffect(() => {
+        if (sources.length) {
+            const tables:any = getTables();
+            if (filter.length <= 2) {
+                clearTimeout(filterTimeout.current);
+                setFilteredTables(tables);
+            } else {
+                clearTimeout(filterTimeout);
+                filterTimeout.current = setTimeout(() => {
+                    setFilteredTables(tables.filter((tab: any) => tab.toLowerCase().includes(filter.toLowerCase())));
+                }, 500);
+            }
+        }
+    }, [filter, sources, history]);
 
     return (
         <>
@@ -93,8 +114,9 @@ const TablePage = () => {
                     variant="subtitle1"
                     component="p"
                 >
-                {`${getSourceName()} ${TABLE_WELCOME}`}
+                {`${getSourceName() || params.source} ${TABLE_WELCOME}`}
                 </Typography>
+                <TextField id="filter" label="Filter" variant="standard" value={filter} onChange={(e) => setFilter(e.target.value)} />
                 {loading ? <CircularProgress /> : (<FormControl component="fieldset">
                     <RadioGroup
                         aria-label="gender"
@@ -102,7 +124,7 @@ const TablePage = () => {
                         value={value}
                         onChange={(e) => setValue(e.target.value)}
                     >
-                        {getTables()?.map((table: any) => {
+                        {filteredTables.map((table: any) => {
                             return (<FormControlLabel key={table} value={table} control={<Radio />} label={table} />)
                         })}
                     </RadioGroup>
